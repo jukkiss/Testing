@@ -1,16 +1,30 @@
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.*;
 
 public class AccountTest {
-    
+
+    private static Account sharedAccount;
     private Account account;
     
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        sharedAccount = new Account();
+    }
+    @AfterClass
+    public static void tearDownAfterClass() {
+        sharedAccount = null;
+    }
+
     @Before
     public void setUp() {
         account = new Account();
     }
-    
+
+    @After
+    public void tearDown() {
+        account = null;
+    }
     @Test
     public void testInitialBalance() {
         assertEquals(0.0, account.getBalance(), 0.01);
